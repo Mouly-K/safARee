@@ -132,12 +132,12 @@ export default function Login(props: any) {
             }}
           />
           <Text style={localStyles.termsAndConditionsText}>
-            Don't have an account?
+            Already have an account?
           </Text>
           <Pressable
             style={localStyles.guestButton}
-            onPress={() => props.navigation.navigate('Registration')}>
-            <Text style={localStyles.guestButtonText}>Register Now</Text>
+            onPress={() => props.navigation.navigate('Login')}>
+            <Text style={localStyles.guestButtonText}>Login</Text>
           </Pressable>
         </View>
         <LoginWith />

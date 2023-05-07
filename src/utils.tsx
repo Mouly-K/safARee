@@ -1,4 +1,61 @@
 import {Platform} from 'react-native';
+import {LatLng} from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
+
+export interface ILatLng {
+  latitude: number;
+  longitude: number;
+}
+export interface IMarker {
+  title: string;
+  description: string;
+  value: string;
+  latlng: ILatLng;
+}
+
+export const defaultMarker: IMarker = {
+  title: '',
+  description: '',
+  value: '0',
+  latlng: {latitude: 0, longitude: 0},
+};
+
+export function generatePointsOnCurvedBezier(
+  startPoint: LatLng,
+  endPoint: LatLng,
+  numberOfPoints: number,
+) {
+  var curvature = 0.3;
+  var controlPoint1 = {
+    latitude: startPoint.latitude,
+    longitude:
+      startPoint.longitude +
+      (endPoint.longitude - startPoint.longitude) * curvature,
+  };
+  var controlPoint2 = {
+    latitude: endPoint.latitude,
+    longitude:
+      endPoint.longitude -
+      (endPoint.longitude - startPoint.longitude) * curvature,
+  };
+
+  var points = [];
+  for (var i = 0; i < numberOfPoints; i++) {
+    var t = i / (numberOfPoints - 1);
+    var x =
+      (1 - t) * (1 - t) * (1 - t) * startPoint.latitude +
+      3 * (1 - t) * (1 - t) * t * controlPoint1.latitude +
+      3 * (1 - t) * t * t * controlPoint2.latitude +
+      t * t * t * endPoint.latitude;
+    var y =
+      (1 - t) * (1 - t) * (1 - t) * startPoint.longitude +
+      3 * (1 - t) * (1 - t) * t * controlPoint1.longitude +
+      3 * (1 - t) * t * t * controlPoint2.longitude +
+      t * t * t * endPoint.longitude;
+    points.push({latitude: x, longitude: y});
+  }
+  return points;
+}
 
 export const validateEmail = (email: string) => {
   return String(email)
@@ -133,4 +190,19 @@ export const generateBoxShadowStyle = (
       shadowColor: shadowColor,
     };
   }
+};
+
+export const requestLocation = async () => {
+  let location;
+  Geolocation.getCurrentPosition(
+    position => {
+      // location = position.coords;
+      return position.coords;
+    },
+    error => {
+      console.log(error.code, error.message);
+    },
+    {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+  );
+  return location;
 };

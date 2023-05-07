@@ -12,6 +12,11 @@ export const styles = StyleSheet.create({
     color: colors.black,
     fontSize: fontSizes.extraBig,
   },
+  semiBold: {
+    fontFamily: fonts.bold,
+    color: colors.black,
+    fontSize: fontSizes.big,
+  },
   medium: {
     fontFamily: fonts.medium,
     color: colors.black,
@@ -49,5 +54,17 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
     marginTop: 20,
     borderRadius: 20,
+  },
+  rowBetween: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  columnBetween: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
