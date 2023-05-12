@@ -18,7 +18,7 @@ export const colors = {
   blue: '#4F88FA',
   lightBlue: '#29C8E2',
   facebookBlue: '#4267b2',
-  yellow: '#ffe923',
+  yellow: '#ffcf5c',
   orange: '#ffa26b',
   lightOrange: '#ffe8da',
   white: '#fff',

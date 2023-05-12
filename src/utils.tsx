@@ -6,11 +6,35 @@ export interface ILatLng {
   latitude: number;
   longitude: number;
 }
+
 export interface IMarker {
   title: string;
   description: string;
   value: string;
   latlng: ILatLng;
+}
+
+export interface IReview {
+  name: string;
+  review: string;
+  rating: number;
+  image: any;
+  timeStamp: string;
+}
+
+export interface IDetails {
+  name: string;
+  overview: string;
+  about: string;
+  distance: number;
+  rating: number;
+  source: any;
+  titleImages: any[];
+  price: number;
+  images: any[];
+  availability: string;
+  location: IMarker;
+  reviews: IReview[];
 }
 
 export const defaultMarker: IMarker = {

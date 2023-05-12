@@ -6,6 +6,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {enableLatestRenderer} from 'react-native-maps';
+
+enableLatestRenderer();
 
 //Screen Imports
 import AccountVerified from './src/screens/onboarding/AccountVerified';

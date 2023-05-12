@@ -54,7 +54,7 @@ export default function Landing(props: any) {
             textStyle={{color: colors.orange}}
             onPress={() => props.navigation.navigate('Registration')}
           />
-          <Pressable style={localStyles.guestButton}>
+          <Pressable style={localStyles.guestButton} onPress={() => props.navigation.navigate("MainApp")}>
             <Entypo
               name="chevron-with-circle-right"
               size={20}

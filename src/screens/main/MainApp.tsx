@@ -23,6 +23,7 @@ import Notifications from './Notifications';
 import Profile from './Profile';
 import ARMain from './ar/ARMain';
 import Search from './Search';
+import Details from './Details';
 
 import {colors} from '../../styles/colors';
 import {generateBoxShadowStyle} from '../../utils';
@@ -86,6 +87,14 @@ export default function MainApp() {
       <Tab.Screen
         name="Search"
         component={Search}
+        options={{
+          tabBarButton: () => null,
+          tabBarHideOnKeyboard: true,
+        }}
+      />
+      <Tab.Screen
+        name="Details"
+        component={Details}
         options={{
           tabBarButton: () => null,
           tabBarHideOnKeyboard: true,

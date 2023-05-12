@@ -7,7 +7,7 @@ export default function Paginator(props: any) {
   const {width} = useWindowDimensions();
 
   return (
-    <View style={{flexDirection: 'row', height: 64}}>
+    <View style={localStyles.container}>
       {props.data.map((_: any, i: number) => {
         const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
 
@@ -35,6 +35,7 @@ export default function Paginator(props: any) {
 }
 
 const localStyles = StyleSheet.create({
+  container: {flexDirection: 'row', marginTop: 20},
   dot: {
     height: 10,
     borderRadius: 5,

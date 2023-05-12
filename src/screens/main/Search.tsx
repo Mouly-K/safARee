@@ -25,7 +25,7 @@ import {amusementParks} from '../../data/data';
 export default function Search(props: any) {
   const {width} = useWindowDimensions();
 
-  const textInputRef = useRef(null);
+  const textInputRef = useRef<TextInput>(null);
 
   const [search, setSearch] = useState('');
 
@@ -55,7 +55,22 @@ export default function Search(props: any) {
           return (
             <ParkCard2
               key={index}
-              onPress={() => props.navigation.navigate('ParkDetails')}
+              onPress={() =>
+                props.navigation.navigate('Details', {
+                  type: 'park',
+                  name: item.name,
+                  overview: item.overview,
+                  about: item.about,
+                  distance: item.distance,
+                  rating: item.rating,
+                  titleImages: item.titleImages,
+                  price: item.price,
+                  images: item.images,
+                  availability: item.availability,
+                  location: item.location,
+                  reviews: item.reviews,
+                })
+              }
               name={item.name}
               rating={item.rating}
               distance={item.distance}

@@ -56,6 +56,7 @@ function Onboarding(props: any) {
           width: '100%',
           justifyContent: 'center',
           alignItems: 'center',
+          marginTop: 30,
           paddingBottom: 20,
           paddingHorizontal: 30,
         }}>
