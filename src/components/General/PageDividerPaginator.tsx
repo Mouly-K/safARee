@@ -26,7 +26,7 @@ export default function PageDividerPaginator(props: any) {
 
         const textColor = props.scrollX.interpolate({
           inputRange,
-          outputRange: [colors.black, colors.white, colors.black],
+          outputRange: [colors.black, colors.orange, colors.black],
           extrapolate: 'clamp',
         });
 
@@ -48,19 +48,15 @@ const localStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flex: 1,
-    marginHorizontal: 20,
     marginBottom: 20,
-    paddingVertical: 8,
-    borderRadius: 50,
-    backgroundColor: colors.lightOrange,
+    backgroundColor: colors.white,
   },
   dot: {
     padding: 8,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50,
-    backgroundColor: colors.orange,
-    marginHorizontal: 8,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.orange,
   },
 });

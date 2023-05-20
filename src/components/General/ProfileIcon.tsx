@@ -1,12 +1,17 @@
-import {Image, View, Text} from 'react-native';
+import {Image, View, Text, Pressable} from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 import {colors} from '../../styles/colors';
 import {styles} from '../../styles/styles';
 
 export default function ProfileIcon(props: any) {
+  const navigation = useNavigation();
+
   return (
-    <View style={[{position: 'relative'}, props.style]}>
+    <Pressable
+      style={[{position: 'relative'}, props.style]}
+      onPress={() => navigation.navigate('Profile')}>
       <Image source={props.source} style={{width: 50, height: 50}} />
       <View
         style={{
@@ -22,8 +27,8 @@ export default function ProfileIcon(props: any) {
           borderWidth: 3,
           borderColor: colors.white,
         }}>
-        <Text style={[styles.small, {color: colors.white}]}>3</Text>
+        <Text style={[styles.small, {color: colors.white}]}>4</Text>
       </View>
-    </View>
+    </Pressable>
   );
 }

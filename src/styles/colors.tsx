@@ -10,7 +10,7 @@ export const colors = {
   teal: '#22BCBC',
   red: '#ff647c',
   googleRed: '#dd5246',
-  green: '#29CB6F',
+  green: '#00c48c',
   lightPurple: '#A687FC',
   googleBlue: '#246BFD',
   lightGoogleBlue: '#E9F0FF',

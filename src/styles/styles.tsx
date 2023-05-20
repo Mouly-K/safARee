@@ -7,6 +7,11 @@ import {fontSizes} from './fontSizes';
 import {generateBoxShadowStyle} from '../utils';
 
 export const styles = StyleSheet.create({
+  extraBold: {
+    fontFamily: fonts.extraBold,
+    color: colors.black,
+    fontSize: fontSizes.extraBig,
+  },
   bold: {
     fontFamily: fonts.bold,
     color: colors.black,

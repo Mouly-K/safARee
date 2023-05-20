@@ -42,6 +42,33 @@ export default function ParkCard2(props: any) {
       <View
         style={{
           position: 'absolute',
+          bottom: 80,
+          left: 10,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255,255,255, 0.25)',
+            paddingHorizontal: 8,
+            paddingVertical: 3,
+            borderRadius: 50,
+          }}>
+          <Text style={[styles.regular, {color: colors.white, marginRight: 5}]}>
+            #theme park
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+          position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',

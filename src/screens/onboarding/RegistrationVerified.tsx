@@ -42,7 +42,7 @@ export default function RegistrationVerified(props: any) {
             marginBottom: 20,
             marginTop: 20,
           }}
-          onPress={() => props.navigation.navigate('Home')}
+          onPress={() => props.navigation.navigate('MainApp')}
         />
       </View>
     </View>

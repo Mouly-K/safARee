@@ -15,6 +15,9 @@ import ImageView from 'react-native-image-viewing';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
+import LinearGradient from 'react-native-linear-gradient';
 
 import {ILatLng, IMarker, IReview} from '../../utils';
 import {colors} from '../../styles/colors';
@@ -25,8 +28,9 @@ import Carousel from '../../components/General/Carousel';
 import Rating from '../../components/General/Rating';
 import ReviewCard from '../../components/General/ReviewCard';
 import PageDivider from '../../components/General/PageDivider';
-import LinearGradient from 'react-native-linear-gradient';
 import ImageCollage from '../../components/General/ImageCollage';
+import StyledButton from '../../components/General/StyledButton';
+import {food} from '../../data/data';
 
 interface Props {
   type: string;
@@ -35,6 +39,7 @@ interface Props {
   about: string;
   distance: string;
   rating: string;
+  source: any;
   titleImages: any[];
   price: string;
   images: any[];
@@ -77,6 +82,7 @@ export default function Details({route, navigation}: any) {
     about,
     distance,
     rating,
+    source,
     titleImages,
     price,
     images,
@@ -121,19 +127,41 @@ export default function Details({route, navigation}: any) {
       />
       <View style={localStyles.carouselContainer}>
         {titleImages && (
-          <Carousel
-            data={titleImages}
-            currentIndex={carouselIndex}
-            setCurrentIndex={setCarouselIndex}
-            renderItem={({item}: any) => (
-              <Pressable
-                style={[localStyles.carouselItem, {width}]}
-                onPress={() => setImageViewEnabled(true)}>
-                <Image source={item.image} style={localStyles.image} />
-              </Pressable>
-            )}
-            showPagination
-          />
+          <>
+            <View
+              style={{
+                position: 'absolute',
+                top: 40,
+                right: 20,
+                flexDirection: 'row',
+                zIndex: 10,
+              }}>
+              <Ionicons
+                name="bookmarks-outline"
+                size={24}
+                color={colors.white}
+              />
+              <Feather
+                name="link"
+                size={24}
+                color={colors.white}
+                style={{marginLeft: 20}}
+              />
+            </View>
+            <Carousel
+              data={titleImages}
+              currentIndex={carouselIndex}
+              setCurrentIndex={setCarouselIndex}
+              renderItem={({item}: any) => (
+                <Pressable
+                  style={[localStyles.carouselItem, {width}]}
+                  onPress={() => setImageViewEnabled(true)}>
+                  <Image source={item.image} style={localStyles.image} />
+                </Pressable>
+              )}
+              showPagination
+            />
+          </>
         )}
       </View>
       <View style={[localStyles.wrapper, {marginBottom: 20}]}>
@@ -179,7 +207,9 @@ export default function Details({route, navigation}: any) {
             />
           </View>
           {location && (
-            <View style={[localStyles.mapContainer, {width: width - 40}]}>
+            <Pressable
+              style={[localStyles.mapContainer, {width: width - 40}]}
+              onPress={() => navigation.navigate('Maps')}>
               <LinearGradient
                 colors={['#ffffffff', '#ffffff67', '#ffffffff']}
                 style={localStyles.linearGradient}
@@ -221,7 +251,55 @@ export default function Details({route, navigation}: any) {
                   <Entypo name="chat" size={20} color={colors.orange} />
                 </View>
               </View>
-            </View>
+            </Pressable>
+          )}
+          {type !== 'ride' && (
+            <StyledButton
+              title={
+                type === 'park'
+                  ? 'BOOK TICKETS'
+                  : type === 'restaurant'
+                  ? 'ORDER NOW'
+                  : ''
+              }
+              style={{
+                backgroundColor: colors.orange,
+                marginHorizontal: 0,
+                height: 50,
+                marginTop: 20,
+                marginBottom: 30,
+              }}
+              onPress={() => {
+                if (type === 'restaurant') {
+                  navigation.navigate('Search', {
+                    type: 'food',
+                    data: food,
+                  });
+                } else if (type === 'park') {
+                  navigation.navigate('Checkout', {
+                    type: type,
+                    cartItemsFromProps: [
+                      {
+                        type: type,
+                        name: name,
+                        overview: overview,
+                        about: about,
+                        distance: distance,
+                        rating: rating,
+                        source: source,
+                        titleImages: titleImages,
+                        price: price,
+                        images: images,
+                        availability: availability,
+                        location: location,
+                        reviews: reviews,
+                        numberOfItems: 1,
+                      },
+                    ],
+                  });
+                }
+              }}
+            />
           )}
         </View>
         {reviews && (
@@ -255,6 +333,7 @@ const localStyles = StyleSheet.create({
     width: '100%',
     height: 500,
     marginBottom: 30,
+    position: 'relative',
   },
   carouselItem: {
     flex: 1,
@@ -304,7 +383,7 @@ const localStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   directionButton: {
     flex: 1,

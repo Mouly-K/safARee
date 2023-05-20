@@ -6,6 +6,7 @@ import SearchIcon from '../../assets/search.svg';
 
 import {styles} from '../../styles/styles';
 import {colors} from '../../styles/colors';
+import {amusementParks} from '../../data/data';
 
 export default function SearchBar() {
   const navigation = useNavigation();
@@ -25,7 +26,9 @@ export default function SearchBar() {
         borderRadius: 10,
         backgroundColor: colors.white,
       }}
-      onPress={() => navigation.navigate('Search')}>
+      onPress={() =>
+        navigation.navigate('Search', {type: 'park', data: amusementParks})
+      }>
       <SearchIcon />
       <Text style={[styles.regular, {color: colors.grey, marginLeft: 10}]}>
         Look around...

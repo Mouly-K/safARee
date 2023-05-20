@@ -123,9 +123,7 @@ export default function Login(props: any) {
                 isEmailValid &&
                 isPasswordValid &&
                 isUserNameValid &&
-                isPhoneValid &&
-                personalDetails.email === 'user@gmail.com' &&
-                personalDetails.password === 'Password@123'
+                isPhoneValid
               ) {
                 props.navigation.navigate('RegistrationVerified');
               }

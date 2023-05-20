@@ -7,6 +7,7 @@ import {
   Pressable,
   Image,
   ScrollView,
+  Modal,
 } from 'react-native';
 import React, {useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -17,7 +18,7 @@ import {colors} from '../../styles/colors';
 import {fonts} from '../../styles/fonts';
 import {styles} from '../../styles/styles';
 import {fontSizes} from '../../styles/fontSizes';
-import {amusementParks, whereToGo, offers} from '../../data/data';
+import {amusementParks, whereToGo, offers, restaurants} from '../../data/data';
 
 import Avatar from '../../assets/avatar.png';
 import MarkerToMarker from '../../assets/marker-to-marker.svg';
@@ -31,6 +32,8 @@ import WeatherCard from '../../components/General/WeatherCard';
 
 export default function Explore(props: any) {
   const {width} = useWindowDimensions();
+
+  const [arTutorialModalVisible, setArTutorialModalVisible] = useState(false);
 
   const SectionDivider = (props: any) => {
     return (
@@ -78,7 +81,12 @@ export default function Explore(props: any) {
         <SearchBar />
         <SectionDivider
           title="TOP DESTINATIONS"
-          onPressViewAll={() => console.log('Top Destinations')}
+          onPressViewAll={() =>
+            props.navigation.navigate('Search', {
+              type: 'park',
+              data: amusementParks,
+            })
+          }
         />
         <ScrollView horizontal>
           {amusementParks.map((item, index) => {
@@ -93,6 +101,7 @@ export default function Explore(props: any) {
                     about: item.about,
                     distance: item.distance,
                     rating: item.rating,
+                    source: item.source,
                     titleImages: item.titleImages,
                     price: item.price,
                     images: item.images,
@@ -123,6 +132,18 @@ export default function Explore(props: any) {
               icon={item.icon}
               image={item.image}
               color={item.color}
+              onPress={() => {
+                if (item.title === 'Where to Eat')
+                  props.navigation.navigate('Search', {
+                    type: 'restaurant',
+                    data: restaurants,
+                  });
+                else if (item.title === 'What to Eat')
+                  props.navigation.navigate('Search', {
+                    type: 'food',
+                    data: restaurants,
+                  });
+              }}
             />
           ))}
         </ScrollView>

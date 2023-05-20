@@ -71,8 +71,12 @@ export default function Login(props: any) {
             validateWith={validatePassword}
             setIsValid={setIsPasswordValid}
           />
-          <Pressable style={{marginTop: 20}} onPress={() => props.navigation.navigate('ForgotPassword')}>
-            <Text style={[styles.regular, {color: colors.orange}]}>Forgot Password?</Text>
+          <Pressable
+            style={{marginTop: 20}}
+            onPress={() => props.navigation.navigate('ForgotPassword')}>
+            <Text style={[styles.regular, {color: colors.orange}]}>
+              Forgot Password?
+            </Text>
           </Pressable>
           <StyledButton
             title="LOG IN"
@@ -91,6 +95,14 @@ export default function Login(props: any) {
                 personalDetails.password === 'Password@123'
               ) {
                 props.navigation.navigate('MainApp');
+                // console.log('Login');
+              } else if (
+                isEmailValid &&
+                isPasswordValid &&
+                personalDetails.email === 'mgmadmin@gmail.com' &&
+                personalDetails.password === 'MGMAdmin@123'
+              ) {
+                props.navigation.navigate('Admin');
                 // console.log('Login');
               }
             }}

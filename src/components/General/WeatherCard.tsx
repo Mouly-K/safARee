@@ -1,13 +1,18 @@
 import {View, Text, Pressable, StyleSheet, Image} from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 import ScatteredShowersIcon from '../../assets/scattered-showers.png';
 import {styles} from '../../styles/styles';
 import {colors} from '../../styles/colors';
 
 export default function WeatherCard() {
+  const navigation = useNavigation();
+
   return (
-    <Pressable style={localStyles.cardContainer}>
+    <Pressable
+      style={localStyles.cardContainer}
+      onPress={() => navigation.navigate('Weather')}>
       <View
         style={{
           flexDirection: 'row',
@@ -25,7 +30,7 @@ export default function WeatherCard() {
         </View>
       </View>
       <Text style={[styles.bold, {fontSize: 16, color: colors.orange}]}>
-        24°C
+        40°C
       </Text>
     </Pressable>
   );

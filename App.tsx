@@ -1,6 +1,7 @@
 import {useState, useEffect, useCallback} from 'react';
 import {View} from 'react-native';
 import 'react-native-gesture-handler';
+import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -21,12 +22,17 @@ import Registration from './src/screens/onboarding/Registration';
 import VerifyOTP from './src/screens/onboarding/VerifyOTP';
 import RegistrationVerified from './src/screens/onboarding/RegistrationVerified';
 import MainApp from './src/screens/main/MainApp';
+import Admin from './src/screens/main/Admin';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
@@ -54,6 +60,7 @@ export default function App() {
             component={RegistrationVerified}
           />
           <Stack.Screen name="MainApp" component={MainApp} />
+          <Stack.Screen name="Admin" component={Admin} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

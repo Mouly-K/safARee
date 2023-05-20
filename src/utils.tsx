@@ -24,6 +24,7 @@ export interface IReview {
 
 export interface IDetails {
   name: string;
+  type: string;
   overview: string;
   about: string;
   distance: number;
@@ -35,6 +36,7 @@ export interface IDetails {
   availability: string;
   location: IMarker;
   reviews: IReview[];
+  numberOfItems?: number;
 }
 
 export const defaultMarker: IMarker = {
@@ -230,3 +232,63 @@ export const requestLocation = async () => {
   );
   return location;
 };
+
+export function secondsToHrsMins(seconds: number) {
+  // check if the input is a valid number
+  if (isNaN(seconds) || seconds < 0) {
+    return 'Invalid input';
+  }
+  // calculate the hours and minutes from the seconds
+  let hours = Math.floor(seconds / 3600);
+  let minutes = Math.floor((seconds % 3600) / 60);
+  // format the output string
+  let output = '';
+  if (hours > 0) {
+    output += hours + ' hrs ';
+  }
+  if (minutes > 0) {
+    output += minutes + ' mins';
+  }
+  // return the output string or "0 mins" if the input is zero
+  return output || '0 mins';
+}
+
+export function convertMetres(metres: number) {
+  // check if the input is a valid number
+  if (isNaN(metres)) {
+    return 'Invalid input';
+  }
+  // convert metres to kilometres if greater than 1000
+  if (metres > 1000) {
+    let kilometres = metres / 1000;
+    // round to one decimal place
+    kilometres = Math.round(kilometres * 10) / 10;
+    // return the string with KM suffix
+    return kilometres + ' KM';
+  }
+  // otherwise, round down the metres to the nearest integer
+  else {
+    metres = Math.floor(metres);
+    // return the string with m suffix
+    return metres + 'm';
+  }
+}
+
+export function secondsToFutureTime(seconds: number) {
+  // check if the input is a valid number
+  if (isNaN(seconds) || seconds < 0) {
+    return 'Invalid input';
+  }
+  // get the current date and time
+  let currentDate = new Date();
+  // add the seconds to the current date and time
+  let futureDate = new Date(currentDate.getTime() + seconds * 1000);
+  // get the hours and minutes of the future date and time
+  let hours = futureDate.getHours();
+  let minutes = futureDate.getMinutes();
+  // format the output string with leading zeros if needed
+  let output =
+    (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+  // return the output string
+  return output;
+}
